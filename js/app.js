@@ -39,11 +39,11 @@ function displayWeatherCard(data) {
 }
 
 document.getElementById("search-btn").addEventListener("click", () => {
-  const cityInput = document.getElementById("city-input").value.trim();
+  const city = document.getElementById("city").value.trim();
   const apiKey = "your-api-key-here";
 
-  if (cityInput) {
-    getWeather(cityInput, apiKey);
+  if (city) {
+    getWeather(city, apiKey);
   } else {
     document.getElementById("weather-data").innerHTML =
       "<p>Please enter a city name.</p>";
