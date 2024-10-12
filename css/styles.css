@@ -1,0 +1,12 @@
+button:hover {
+  background-color: #0056b3;
+}
+
+.weather-container {
+  margin-top: 20px;
+}
+
+.weather-container p {
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
