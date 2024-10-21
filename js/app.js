@@ -1,51 +1,38 @@
-function getWeather(city, apikey) {
+function getWeather() {
+  const city = document.getElementById("cityInput").value;
+  const apiKey = "e0898e3b7845a8027172dc458b597ebe";
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
+  // To fetch weather data from the API
   fetch(apiUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`City not found: ${response.status}`);
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
-      displayWeatherCard(data);
+      // To Display the fetched weather data
+      document.getElementById(
+        "cityName"
+      ).innerText = `Weather in ${data.name}, ${data.sys.country}`;
+      document.getElementById(
+        "temp"
+      ).innerText = `Temperature: ${data.main.temp}°C`;
+      document.getElementById(
+        "humidity"
+      ).innerText = `Humidity: ${data.main.humidity}%`;
+      document.getElementById(
+        "windSpeed"
+      ).innerText = `Wind Speed: ${data.wind.speed} m/s`;
     })
     .catch((error) => {
-      console.error("Error fetching weather data:", error);
-      document.getElementById(
-        "weather-data"
-      ).innerHTML = `<p>Error fetching weather data: ${error.message}</p>`;
+      // To handle any errors during the fetch process
+      console.error("Error fetching the weather data:", error);
+      alert("City not found. Please try again.");
     });
 }
 
-function displayWeatherCard(data) {
-  const weatherContainer = document.getElementById("weather-data");
-
-  const weatherCardHTML = `
-<div class="weather-card">
-            <h2>${data.name}</h2>
-            <div class="weather-info">
-                <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="Weather icon">
-                <p class="temp">${data.main.temp} °C</p>
-                <p class="description">${data.weather[0].description}</p>
-            </div>
-            <p>Humidity: ${data.main.humidity}%</p>
-            <p>Wind Speed: ${data.wind.speed} m/s</p>
-        </div>
-    `;
-
-  weatherContainer.innerHTML = weatherCardHTML;
+// Function to reset the input and weather display
+function reset() {
+  document.getElementById("cityInput").value = "";
+  document.getElementById("cityName").innerText = "";
+  document.getElementById("temp").innerText = "";
+  document.getElementById("humidity").innerText = "";
+  document.getElementById("windSpeed").innerText = "";
 }
-
-document.getElementById("search-btn").addEventListener("click", () => {
-  const city = document.getElementById("city").value.trim();
-  const apiKey = "your-api-key-here";
-
-  if (city) {
-    getWeather(city, apiKey);
-  } else {
-    document.getElementById("weather-data").innerHTML =
-      "<p>Please enter a city name.</p>";
-  }
-});

@@ -5,28 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <header>
-        <h1>Weather App</h1>
-    </header>
+    <h1>Weather App</h1>
+    <p>Enter a city name and country code to get the current weather:</p>
 
-    <main>
-        <section>
-            <input type="text" id="city" placeholder="Enter city name">
-            <button id="search-btn">Get Weather</button>
-        </section>
+    <!-- Input for city and country code -->
+    <input type="text" id="cityInput" placeholder="Enter city name, Country code...">
+    <button onclick="getWeather()">Get Weather</button>
+    <button onclick="reset()">Reset</button>
 
-        <section id="weather-data" class="weather-container"></section>
+    <!-- Weather info container -->
+    <div class="weather-container">
+        <div class="weather-info" id="weatherInfo">
+            <h2 id="cityName"></h2>
+            <p id="temp"></p>
+            <p id="humidity"></p>
+            <p id="windSpeed"></p>
+        </div>
+    </div>
 
-        <footer>
-            <p>&copy; 2024 Padmaja Rani</p>
-        </footer>
-
-    </main>
-    <script src="js/app.js"></script>
+    <!-- Link to external JavaScript -->
+    <script src="app.js"></script>
 </body>
 
 </html>
